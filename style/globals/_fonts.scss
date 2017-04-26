@@ -1,0 +1,62 @@
+@mixin responsive-font($responsive, $min, $max: false, $fallback: false, $invert: false) {
+  $responsive-unitless: $responsive / ($responsive - $responsive + 1);
+  $dimension: if(unit($responsive) == 'vh', 'height', 'width');
+  $min-breakpoint: $min / $responsive-unitless * 100;
+  
+  @media (max-#{$dimension}: #{$min-breakpoint}) {
+    font-size: $min;
+  }
+
+  @if $max {
+    $max-breakpoint: $max / $responsive-unitless * 100;
+    
+    @media (min-#{$dimension}: #{$max-breakpoint}) {
+      font-size: $max;
+    }
+  }
+  
+  @if $fallback {
+    font-size: $fallback;
+  }
+  
+  font-size: $responsive;
+}
+
+%fontNormal {
+  @include media(">desktop") {
+    @include responsive-font(2.6vw, 1.2rem, 1.5rem);
+  }
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+%fontBold {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+%fontDefault {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+%fontH1 {
+  @include responsive-font(3.5vw, 1.4rem, 2.6rem);
+  @extend %fontBold;
+}
+%fontH2 {
+  @include responsive-font(3.2vw, 1.2rem, 2rem);
+  @extend %fontBold;
+}
+%fontH3 {
+  @include responsive-font(3vw, 1rem, 1.7rem);
+  @extend %fontBold;
+}
+%fontH4 {
+  @include responsive-font(2.6vw, 0.9rem, 1.5rem);
+  @extend %fontBold;
+}
+%fontH5 {
+  @include responsive-font(2vw, 0.8rem, 1rem);
+  @extend %fontBold;
+}

@@ -1,0 +1,37 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync": "browser-sync start --no-notify --server --serveStatic www --index www/index.html --files www",
+    "watch": "watchify --extension=jsx -x react -x react-dom --debug --entry ./src/index.jsx -o ./www/res/js/bundle.js -v -t [ babelify --presets [ es2015 react stage-0 ] ]",
+    "sass": "node-sass --source-map true --indent-type space --indent-width 2 --output-style compressed --include-path src/ style/main.scss --output www/res/css/ -w"
+  },
+  "keywords": [],
+  "author": "nksFrank",
+  "license": "",
+  "dependencies": {
+    "classnames": "~2.2.5",
+    "dedux": "~1.0.7",
+    "preact": "~8.1.0",
+    "preact-compat": "~3.14.3",
+    "rethinkdb": "^2.3.3"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.8",
+    "browserify": "^14.1.0",
+    "idb": "^2.0.1",
+    "node-sass": "^4.5.2",
+    "react": "~15.4.2",
+    "react-dom": "~15.4.2",
+    "watchify": "^3.9.0"
+  }
+}

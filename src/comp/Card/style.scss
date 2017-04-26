@@ -1,0 +1,50 @@
+@import './style/importable';
+
+
+%backgroundImge {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.card {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  background: white;
+  box-shadow: $global-shadow-two;
+}
+.card--content {
+  align-self: flex-end;
+  flex-grow: 1;
+  background: white;
+}
+.card--title {
+  @extend %fontH2;
+  padding: 1rem 1rem 0;
+}
+.card--summary {
+  padding: 0 1rem 1rem;
+}
+
+.blogcontainer {
+  margin-top: 1rem;
+  @include media(">=desktop") {
+    display: flex;
+    &.three {
+      .card {
+        $threeWidth:29vw;
+        width: $threeWidth;
+        height: $threeWidth/(3/4);
+        max-height: 40vh;
+      }
+    }
+  }
+
+  .card {
+    margin: 0.8rem;
+  }
+}

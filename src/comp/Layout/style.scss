@@ -1,0 +1,24 @@
+@import './style/importable';
+
+$header-color: #ECEFF1;
+$header-size: 3rem;
+
+.header {
+  height: $header-size;
+  line-height: $header-size;
+  background: $header-color;
+  box-shadow: $global-shadow-four;
+}
+.hamburger__icon {
+  height: $header-size;
+  width: $header-size;
+}
+
+.hamburger__menu {
+  padding: 0;
+  margin: 0;
+  list-style-type:none;
+  z-index: 1000;
+  position: absolute;
+  background: #fff;
+}

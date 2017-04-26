@@ -1,0 +1,12 @@
+@import 'importable';
+
+$bodyPadding: 0;
+$bodyMargin: 0;
+$bodyBackground: #f8f8f8;
+
+$fontFamily: 'Roboto', sans-serif;
+$fontColorDefault: $colorGrey900;
+$fontColorInverted: white;
+
+$componentMissingBackground: $colorGrey900;
+$componentMissingColor: $fontColorInverted;

@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,500');
+@import 'variables';
+
+@import 'comp/Layout/style';
+@import 'comp/Block/style';
+@import 'comp/Blog/style';
+@import 'comp/Card/style';
+
+* {
+  box-sizing: border-box;
+}
+html {
+  @extend %fontDefault;
+  font-family: $fontFamily;
+  color: $fontColorDefault;
+}
+body {
+  @extend %fontNormal;
+  padding: $bodyPadding;
+  margin: $bodyMargin;
+  background-color: $bodyBackground;
+}
+.component--missing {
+  background-color: $componentMissingBackground;
+  color: $componentMissingColor;
+}
+
+h1 {
+  @extend %fontH1;
+}
+
+h2 {
+  @extend %fontH2;
+}
+
+h3 {
+  @extend %fontH3;
+}
+
+h4 {
+  @extend %fontH4;
+}
+
+h5 {
+  @extend %fontH5;
+}
