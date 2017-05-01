@@ -1,5 +1,3 @@
-import {phone, tablet, desktop} from '../breakpoints';
-
 export default (props) =>
   <picture>
     <source srcset={`${props.src}?s=desktop`} media={`(min-width:${desktop})`} />

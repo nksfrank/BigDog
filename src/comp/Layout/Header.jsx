@@ -1,5 +1,5 @@
 export default ({
-  appShell:{
+  appShell: {
     menu
   },
   mainMenu: {

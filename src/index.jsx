@@ -1,5 +1,5 @@
 import {actionsWrapper} from './comp/wrappers';
-import Header from './comp/Layout/Header/';
+import Header from './comp/Layout/Header';
 import {store, actions} from './state';
 import initialState from './initialstate';
 import debounce from './utils/debounce';
