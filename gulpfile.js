@@ -47,6 +47,7 @@ const config = {
 }
 
 function mapError(err) {
+  console.log(err.message);
   if (err.fileName) {
     // Regular error
     gutil.log(`${chalk.red(err.name)}: ${chalk.yellow(err.fileName.replace(path.join(__dirname, '/src/js/'), ''))}
