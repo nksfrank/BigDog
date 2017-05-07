@@ -14,8 +14,8 @@ const Block = ({
     <span>Hello {name} {count}</span>
     <span></span>
     <div>
-      <button onClick={() => increment(5)}>Increase</button>
       <button onClick={() => decrement(5)}>Decrement</button>
+      <button onClick={() => increment(5)}>Increase</button>
     </div>
   </div>;
 
