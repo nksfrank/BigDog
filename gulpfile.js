@@ -21,8 +21,11 @@ const config = {
     debug: true,
     sourceType: 'module',
     extensions: ['.js', '.jsx'],
-    entries: ['./src/index.jsx'],
     baseDir: './src/'
+  },
+  entries: {
+    js: {entries: ['./src/index.jsx']},
+    sw: {entries: ['./src/serviceWorker.js']}
   },
   js: {
     babelify: {
@@ -32,7 +35,9 @@ const config = {
       ]
     },
     outputDir: './www/res/js/',
-    outputFile: 'bundle.js'
+    outputFile: 'bundle.js',
+    serviceWorkerFile: 'sw.js',
+    serviceWorkerOutputDir: './www/'
   },
   sass: {
     src: ['./style/**/*.scss', './src/**/*.scss'],
@@ -47,7 +52,6 @@ const config = {
 }
 
 function mapError(err) {
-  console.log(err.message);
   if (err.fileName) {
     // Regular error
     gutil.log(`${chalk.red(err.name)}: ${chalk.yellow(err.fileName.replace(path.join(__dirname, '/src/js/'), ''))}
@@ -60,25 +64,52 @@ function mapError(err) {
   }
 }
 
-function bundle(bundler) {
-  const bundleTimer = duration('Javascript bundle time')
-  const sourceTimer = duration('Sourcemap bundle time')
-  bundler
-    .bundle()
-    .on('error', mapError)
-    .pipe(source('main.jsx'))
-    .pipe(bundleTimer)
-    .pipe(buffer())
-    .pipe(rename(config.js.outputFile))
-    .once('data', sourceTimer.start)
-    .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(sourcemaps.write('./map'))
-    .pipe(sourceTimer)
-    .pipe(gulp.dest(config.js.outputDir))
-}
+gulp.task('frontend:watch', ['frontend:js', 'frontend:sw'])
 
-gulp.task('frontend:watch', () => {
-  const args = Object.assign({}, watchify.args, config.browserify)
+gulp.task('frontend:js', () => {
+  const bundle = (bundler) => {
+    const bundleTimer = duration('Javascript bundle time')
+    const sourceTimer = duration('Sourcemap bundle time')
+    bundler
+      .bundle()
+      .on('error', mapError)
+      .pipe(source('main.jsx'))
+      .pipe(bundleTimer)
+      .pipe(buffer())
+      .pipe(rename(config.js.outputFile))
+      .once('data', sourceTimer.start)
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(sourcemaps.write('./map'))
+      .pipe(sourceTimer)
+      .pipe(gulp.dest(config.js.outputDir))
+  }
+  const args = Object.assign({}, watchify.args, config.browserify, config.entries.js)
+  const bundler = browserify(args)
+    .plugin(watchify, {ignoreWatch: ['**/node_modules/**', '**/bower_components/**']})
+    .transform(babelify, config.js.babelify)
+  bundle(bundler)
+  bundler.on('update', () => {
+    bundle(bundler)
+  })
+  return bundler
+})
+
+gulp.task('frontend:sw', () => {
+  const bundle = (bundler) => {
+    const swTimer = duration('ServiceWorker bundle time')
+    bundler
+      .bundle()
+      .on('error', mapError)
+      .pipe(source('main.jsx'))
+      .pipe(swTimer)
+      .pipe(buffer())
+      .pipe(rename(config.js.serviceWorkerFile))
+      .once('data', swTimer.start)
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(sourcemaps.write('./map'))
+      .pipe(gulp.dest(config.js.serviceWorkerOutputDir))
+  }
+  const args = Object.assign({}, watchify.args, config.browserify, config.entries.sw)
   const bundler = browserify(args)
     .plugin(watchify, {ignoreWatch: ['**/node_modules/**', '**/bower_components/**']})
     .transform(babelify, config.js.babelify)
