@@ -28,7 +28,9 @@
     "document": false,
     "navigator": false,
     "window": false,
-    "h": false
+    "h": false,
+    "render": false,
+    "Component": false
   },
   
   "settings": {
