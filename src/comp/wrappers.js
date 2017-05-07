@@ -1,14 +1,12 @@
 import components from './components'
-import {store} from '../state'
 
 export const blockWrapper = (elm) =>
   h(components(elm.$componentType), elm)
 
-
 export class Provider {
   getChildContext() {
-    const { children, ...context } = this.props;
-    return context;
+    const { children, ...context } = this.props
+    return context
   }
   render({children}) {
     return children && children[0] || null
