@@ -1,18 +1,19 @@
-import ContentArea from './shared/ContentArea';
-import Block from './Block';
+import ContentArea from './shared/ContentArea'
+import Block from './Block'
 import {BlogBlock, BlogContainer} from './Blog'
-import {Card, CardContainer} from './Card';
+import {Card, CardContainer} from './Card'
 
-const NoComponent = ({$componentType}) => {console.log($componentType); return (<div>Component <code>{$componentType}</code> doesn't exist</div>)};
+const NoComponent = ({$componentType}) => (<div>Component <code>{$componentType}</code> doesn't exist</div>)
 
 const components = new Map([
-  ["$contentArea", ContentArea],
-  ["block", Block],
-  ["blogBlock", BlogBlock],
-  ["card", Card],
-  ["cardContainer", CardContainer],
+  ['$contentArea', ContentArea],
+  ['block', Block],
+  ['blogBlock', BlogBlock],
+  ['blogContainer', BlogContainer],
+  ['card', Card],
+  ['cardContainer', CardContainer],
 
-  ["_noComponent", NoComponent]
-]);
+  ['_noComponent', NoComponent]
+])
 
-export default ($componentType) => components.get($componentType) || components.get("_noComponent");
+export default ($componentType) => components.get($componentType) || components.get('_noComponent')

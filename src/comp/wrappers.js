@@ -1,24 +1,29 @@
-import {Component} from 'preact';
-import components from './components';
-import {store} from '../state';
-
-export const actionsWrapper = (actions) => (elm) =>
-  React.createElement(components(elm.$componentType), {...elm, actions});
+import components from './components'
+import {store} from '../state'
 
 export const blockWrapper = (elm) =>
-  React.createElement(components(elm.$componentType), elm);
+  h(components(elm.$componentType), elm)
 
-export function stateWrapper(selector = state => state) {
+
+export class Provider {
+  getChildContext() {
+    const { children, ...context } = this.props;
+    return context;
+  }
+  render({children}) {
+    return children && children[0] || null
+  }
+}
+
+export function connect(selector = state => state, actions = action => action) {
   return function wrapped(Wrapped) {
     return class Connected extends Component {
-      constructor(props) {
-        super(props);
-        this.state = selector(store.getState());
-        store.subscribe(s => this.setState(Object.assign({}, selector(s)))).bind(this);
+      componentWillMount() {
+        this.setState(Object.assign({}, selector(this.context.store.getState()), actions(this.context.actions)))
+        this.context.store.subscribe(s => this.setState(selector(s)))
       }
-      render() {
-        return <Wrapped {...this.props} {...this.state} />
-      }
+
+      render = (props, state, context) => <Wrapped {...props} {...state} />
     }
   }
 }

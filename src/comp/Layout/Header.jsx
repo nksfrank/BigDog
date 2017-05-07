@@ -1,15 +1,13 @@
-import {h} from 'preact'
+import {connect} from '../wrappers'
 
-export default ({
+const Header = ({
   appShell: {
     menu
   },
   mainMenu: {
     isOpen
   },
-  actions: {
-    toggleMenu
-  }
+  toggleMenu
 }) =>
   <div class='header'>
     <button class='hamburger__icon' onClick={() => toggleMenu()}>Menu</button>
@@ -21,3 +19,11 @@ export default ({
       </nav>
     )}
   </div>
+
+export default connect(state => ({
+  mainMenu: state.mainMenu,
+  appShell: state.appShell
+}),
+actions => ({
+  toggleMenu: actions.toggleMenu
+}))(Header)

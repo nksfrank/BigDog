@@ -1,26 +1,28 @@
-import ContentArea from '../shared/ContentArea';
-import {stateWrapper} from '../wrappers';
+import ContentArea from '../shared/ContentArea'
+import {connect} from '../wrappers'
 
 const Block = ({
-  blockActions,
+  blockActions: {
+    count
+  },
   name,
-  $contentArea,
 
-  actions: {
-    increment,
-    decrement
-  }
-}) => 
+  increment,
+  decrement
+}) =>
   <div className="block">
-    <span>Hello {name}</span>
-    <span>{blockActions.count}</span>
+    <span>Hello {name} {count}</span>
+    <span></span>
     <div>
       <button onClick={() => increment(5)}>Increase</button>
       <button onClick={() => decrement(5)}>Decrement</button>
     </div>
-    <ContentArea {...$contentArea} />
   </div>;
 
-export default stateWrapper(state => ({
+export default connect(state => ({
   blockActions: state.blockActions,
-}))(Block);
+}),
+actions => ({
+  increment: actions.increment,
+  decrement: actions.decrement
+}))(Block)

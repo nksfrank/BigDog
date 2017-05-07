@@ -1,15 +1,17 @@
 import {pushState} from '../shared/history';
-import {stateWrapper} from '../wrappers';
+import {connect} from '../wrappers';
 
 const Card = ({
   key,
   title,
   summary,
-  img,
+  img: {
+    src
+  },
   url,
   count
 }) =>
-  <div className="card" style={{backgroundImage: `url(${img.src})`}} onClick={() => pushState(url)}>
+  <div className="card" style={{backgroundImage: `url(${src})`}} onClick={() => pushState(url)}>
     <div className="card--content">
       <div className="card--title">
         {title} {count}
@@ -20,4 +22,4 @@ const Card = ({
     </div>
   </div>;
 
-export default stateWrapper(state => ({count: state.blockActions.count}))(Card);
+export default connect(state => ({count: state.blockActions.count}))(Card);

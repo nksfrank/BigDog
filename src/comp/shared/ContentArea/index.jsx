@@ -1,5 +1,5 @@
-import cn from 'classnames';
-import {blockWrapper} from '../../wrappers';
+import cn from 'classnames'
+import {blockWrapper} from '../../wrappers'
 
 export default ({
   className,
@@ -9,4 +9,4 @@ export default ({
     <div class={cn(className, 'content-area')}>
       {content.map(c => blockWrapper(c))}
     </div>
-  );
+  )

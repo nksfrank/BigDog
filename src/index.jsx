@@ -1,36 +1,26 @@
-import React from 'preact-compat';
-import preact, {h, render} from 'preact';
-import {actionsWrapper} from './comp/wrappers';
-import Header from './comp/Layout/Header';
+import {actionsWrapper, Provider} from './comp/wrappers';
+import {Header, Content} from './comp/Layout';
 import {store, actions} from './state';
 import initialState from './initialstate';
 import debounce from './utils/debounce';
 
-const App = ({state, actions}) =>
-  <div>
-    <Header actions={actions} {...state} />
-    <Content actions={actions} {...state} />
-  </div>
+const App = ({store}) =>
+  <Provider actions={actions} store={store}>
+    <div>
+      <Header />
+      <Content />
+    </div>
+  </Provider>
 
-
-const wrapper = actionsWrapper(actions);
-const Content = ({page, actions}) =>
-  <div>
-    {page.map(block => wrapper(block))}
-  </div>;
-
-function r(state) {
-  console.log(state);
+function r(store) {
   render(
-    h(App, {state, actions}),
+    h(App, {store}),
     document.body
   );
 }
 
-// console.log(JSON.stringify(state.page,null, 2));
-store.subscribe(state => r(state));
-r(store.getState());
-// console.log(JSON.stringify(state.page,null, 2));
+r(store);
+
 if(typeof window !== 'undefined') {
-  // require('preact/devtools');
+  require('preact/devtools');
 }

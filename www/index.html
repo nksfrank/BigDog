@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title></title>
-  <link rel="stylesheet" type="text/css" href="res/css/main.css">
-  <script type="text/javascript" src="../node_modules/preact/dist/preact.min.js"></script>
-  <script type="text/javascript" src="../node_modules/proptypes/index.js"></script>
-  <script type="text/javascript" src="../node_modules/preact-compat/dist/preact-compat.js"></script>
-  <script>
-    var React = preactCompat,
-        ReactDOM = preactCompat;
-  </script>
-</head>
-<body>
-  <div id="container"></div>
-  <script type="text/javascript" src="res/js/bundle.js"></script>
-  <script id="__bs_script__">//<![CDATA[
-    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.8'><\/script>".replace("HOST", location.hostname));
-  //]]></script>
-</body>
+  <head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="res/css/main.css">
+    <script type="text/javascript" src="../node_modules/preact/dist/preact.min.js"></script>
+    <script type="text/javascript">
+      window.preact = preact;
+      window.h = preact.h;
+      window.Component = preact.Component;
+      window.render = preact.render;
+    </script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type="text/javascript" src="res/js/bundle.js"></script>
+    <script id="__bs_script__">//<![CDATA[
+      document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.8'><\/script>".replace("HOST", location.hostname));
+    //]]>
+    </script>
+  </body>
 </html>
