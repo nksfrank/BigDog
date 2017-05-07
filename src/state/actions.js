@@ -1,4 +1,4 @@
-import {createActions} from 'dedux';
-import modifiers from './modifiers';
+import {createActions} from 'dedux'
+import modifiers from './modifiers'
 
-export default createActions(Object.keys(modifiers));
+export default createActions(Object.keys(modifiers))

@@ -9,4 +9,4 @@ const Content = ({
 
 export default connect(state => ({
   page: state.page
-}))(Content);
+}))(Content)

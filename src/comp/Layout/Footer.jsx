@@ -1,8 +1,4 @@
-export default ({
-  appShell: {
-    
-  }
-}) =>
+export default () =>
   <div>
     
-  </div>;
+  </div>

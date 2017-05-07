@@ -1,2 +1,4 @@
-export default (props) =>
-  <div className="img" style={{backgroundImage: `url(${props.src})`}}></div>
+export default ({
+  src
+}) =>
+  <div className="img" style={{backgroundImage: `url(${src})`}}></div>

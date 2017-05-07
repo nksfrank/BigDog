@@ -1,5 +1,3 @@
-import {BgImg} from '../shared';
-
 export default ({
   img: {
     src

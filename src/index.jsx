@@ -1,8 +1,6 @@
-import {actionsWrapper, Provider} from './comp/wrappers';
-import {Header, Content} from './comp/Layout';
-import {store, actions} from './state';
-import initialState from './initialstate';
-import debounce from './utils/debounce';
+import {Provider} from './comp/wrappers'
+import {Header, Content} from './comp/Layout'
+import {store, actions} from './state'
 
 const App = ({store}) =>
   <Provider actions={actions} store={store}>
@@ -16,11 +14,15 @@ function r(store) {
   render(
     h(App, {store}),
     document.body
-  );
+  )
 }
 
-r(store);
+r(store)
 
-if(typeof window !== 'undefined') {
-  require('preact/devtools');
+if (typeof window !== 'undefined') {
+  require('preact/devtools')
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+  }
 }

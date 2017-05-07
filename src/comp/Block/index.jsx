@@ -1,4 +1,3 @@
-import ContentArea from '../shared/ContentArea'
 import {connect} from '../wrappers'
 
 const Block = ({
@@ -17,10 +16,10 @@ const Block = ({
       <button onClick={() => decrement(5)}>Decrement</button>
       <button onClick={() => increment(5)}>Increase</button>
     </div>
-  </div>;
+  </div>
 
 export default connect(state => ({
-  blockActions: state.blockActions,
+  blockActions: state.blockActions
 }),
 actions => ({
   increment: actions.increment,

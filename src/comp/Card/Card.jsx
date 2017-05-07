@@ -1,5 +1,5 @@
-import {pushState} from '../shared/history';
-import {connect} from '../wrappers';
+import {pushState} from '../shared/history'
+import {connect} from '../wrappers'
 
 const Card = ({
   key,
@@ -20,6 +20,6 @@ const Card = ({
         {summary}
       </div>
     </div>
-  </div>;
+  </div>
 
-export default connect(state => ({count: state.blockActions.count}))(Card);
+export default connect(state => ({count: state.blockActions.count}))(Card)
