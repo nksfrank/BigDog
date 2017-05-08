@@ -13,7 +13,7 @@
   })
 
   self.addEventListener('fetch', (event) => {
-    if (!navigator.online) {
+    if (!navigator.onLine) {
       event.respondWith(new Response('<h1>Offline :(</h1>', {headers: {'Content-Type': 'text/html'}}))
       return
     }
